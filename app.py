@@ -23,19 +23,29 @@
 from flask import Flask, request, jsonify, render_template
 from models import db, connect_db, Cupcake
 
-def create_app():
-    app = Flask(__name__)
+# def create_app():
+#     app = Flask(__name__)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///cupcakes'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRET_KEY'] = "oh-so-secret"
+#     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///cupcakes'
+#     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#     app.config['SECRET_KEY'] = "oh-so-secret"
 
-    with app.app_context():
-        connect_db(app)
+#     with app.app_context():
+#         connect_db(app)
 
-    return app
+#     return app
 
-app = create_app()
+# app = create_app()
+
+app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///cupcakes'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = "oh-so-secret"
+
+app.app_context().push()
+
+connect_db(app)
 
 # Above code was an attempt to fix "RuntimeError: Working outside of application context."
 
