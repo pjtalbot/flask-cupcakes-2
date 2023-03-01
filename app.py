@@ -69,7 +69,7 @@ def root():
 def list_cupcakes():
 
     cupcakes = [cupcake.to_dict() for cupcake in Cupcake.query.all()]
-    return jsonify(cupcakes=list_cupcakes)
+    return jsonify(cupcakes=cupcakes)
 
 @app.route('/api/cupcakes', methods=['POST'])
 def create():
@@ -102,11 +102,11 @@ def update_cupcake(cupcake_id):
 
     return jsonify(cupcake=cupcake.to_dict())
 
-@app.route("/api/cupcakes/<int:cupcake_id>", methods=["DELETE"])
+@app.route("/api/cupcakes/<int:id>", methods=["DELETE"])
 def delete_cupcake(id):
 
     cupcake = Cupcake.query.get_or_404(id)
     db.session.delete(cupcake)
     db.session.commit()
 
-    return jsonify(message=f"Deleted Cupcake id:{id}")
+    return jsonify(message="Deleted")
