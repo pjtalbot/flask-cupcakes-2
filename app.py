@@ -35,7 +35,15 @@ def create_app():
 
     return app
 
-app = Flask(__name__)
+app = create_app()
+
+# Above code was an attempt to fix "RuntimeError: Working outside of application context."
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///cupcakes'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SECRET_KEY'] = "oh-so-secret"
+
+# connect_db(app)
 
 
 
